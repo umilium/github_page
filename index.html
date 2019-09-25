@@ -4,18 +4,26 @@ test test
 </div>
 
 <script defer>
-    navigator.usb.getDevices().then(devices => {
-        console.log(devices);
-    });
+    // navigator.usb.getDevices().then(devices => {
+    //     console.log(devices);
+    // });
 
-    // navigator.usb.requestDevice({
-    //         filters: []
-    //     })
-    //     .then(device => {
-    //         console.log(device.productName); // "Arduino Micro"
-    //         console.log(device.manufacturerName); // "Arduino LLC"
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //     });
+    // 製造元ID
+    const vendorId = 0xabcd;
+    // 製品ID
+    const productId = 0x1234;
+
+    navigator.usb.requestDevice({
+            filters: [{
+                'vendorId': vendorId,
+                'productId': productId
+            }]
+        })
+        .then(device => {
+            console.log(device.productName); // "Arduino Micro"
+            console.log(device.manufacturerName); // "Arduino LLC"
+        })
+        .catch(error => {
+            console.log(error);
+        });
 </script>
