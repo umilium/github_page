@@ -1,29 +1,37 @@
 test test
 
-<div class="webusb">
-</div>
+<form class="form">
+    <button type="button" onclick="auth()" id="login-button">Login</button>
+</form>
 
-<script defer>
-    // navigator.usb.getDevices().then(devices => {
-    //     console.log(devices);
-    // });
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+    'use strict';
 
-    // 製造元ID
-    const vendorId = 0xabcd;
-    // 製品ID
-    const productId = 0x1234;
+    const auth = () => {
+        // 製造元ID
+        const vendorId = 0x05ac;
+        // 製品ID
+        const productId = 0x8510;
+        // シリアル番号
+        const serialNumber = 'DJHCAWZ5GVDNYGE0';
 
-    navigator.usb.requestDevice({
-            filters: [{
+        navigator.usb.requestDevice({
+            'filters': [{
                 'vendorId': vendorId,
                 'productId': productId
             }]
-        })
-        .then(device => {
-            console.log(device.productName); // "Arduino Micro"
-            console.log(device.manufacturerName); // "Arduino LLC"
-        })
-        .catch(error => {
+        }).then(device => {
+            if (device.serialNumber === serialNumber) {
+                console.log('success!');
+                login();
+                return device.open;
+            } else {
+                console.log('false!');
+                alert('認証に失敗しました');
+            }
+        }).catch(error => {
             console.log(error);
         });
+    }
 </script>
