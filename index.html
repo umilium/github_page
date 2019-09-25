@@ -24,11 +24,11 @@ test test
         }).then(device => {
             if (device.serialNumber === serialNumber) {
                 console.log('success!');
-                login();
+                alert('ログインに成功しました');
                 return device.open;
             } else {
                 console.log('false!');
-                alert('認証に失敗しました');
+                alert('ログインに失敗しました');
             }
         }).catch(error => {
             console.log(error);
