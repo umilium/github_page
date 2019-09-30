@@ -42,6 +42,31 @@
                 console.log(device);
                 console.log(device.configurations)
                 console.log('connection ok!');
+
+                try {
+                    if (device.configuration === null) {
+                        console.log("selectConfiguration");
+                        await device.selectConfiguration(1);
+                    }
+
+                    console.log("claimInterface");
+                    await device.claimInterface(0);
+
+                    do {
+                        await session(device);
+                        await sleep(500);
+                    } while (true);
+                } catch (e) {
+                    console.log(e);
+                    alert(e);
+                    try {
+                        device.close();
+                    } catch (e) {
+                        console.log(e);
+                    }
+                    
+                    throw e;
+                }
             })
             // .then(() => device.selectConfiguration(1)) // Select configuration #1 for the device.
             // .then(() => device.claimInterface(2)) // Request exclusive control over interface #2.
