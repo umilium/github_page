@@ -36,6 +36,7 @@
             })
             .then(selectedDevice => {
                 device = selectedDevice;
+                console.log(device.configurations)
                 return device.open(); // Begin a session.
             })
             .then(() => {
