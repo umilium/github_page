@@ -97,17 +97,17 @@ var app = new Vue({
     connect: async function() {
       try {
         await this.port.connect();
-        console.log('connecting...');
-        this.statusText = 'connected';
-        this.connectButtonText = 'Disconnect';
-
-        //デバイス側から値が送られてくるのを待ち受ける
-        this.port.onReceive = data => {
-          let textDecoder = new TextDecoder();
-          console.log(textDecoder.decode(data));
-        }
-
-        this.port.onReceiveError = error => console.error(error);
+        // console.log('connecting...');
+        // this.statusText = 'connected';
+        // this.connectButtonText = 'Disconnect';
+        //
+        // //デバイス側から値が送られてくるのを待ち受ける
+        // this.port.onReceive = data => {
+        //   let textDecoder = new TextDecoder();
+        //   console.log(textDecoder.decode(data));
+        // }
+        //
+        // this.port.onReceiveError = error => console.error(error);
       } catch (error) {
         console.log(error);
         this.statusText = error;
