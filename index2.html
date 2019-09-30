@@ -1,0 +1,21 @@
+<form class="form">
+    <button type="button" onclick="auth()" id="login-button">Login</button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+    'use strict';
+
+    navigator.usb.requestDevice({
+            filters: [{
+                vendorId: 0x04e6
+            }]
+        })
+        .then(device => {
+            console.log(device.productName); // "Arduino Micro"
+            console.log(device.manufacturerName); // "Arduino LLC"
+        })
+        .catch(error => {
+            console.log(error);
+        });
+</script>
