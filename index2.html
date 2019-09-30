@@ -34,11 +34,11 @@
                     vendorId: 0x04e6
                 }]
             })
-            .then(selectedDevice => {
+            .then(async selectedDevice => {
+
                 device = selectedDevice;
-                return device.open(); // Begin a session.
-            })
-            .then(() => {
+                await device.open(); // Begin a session.
+
                 console.log(device);
                 console.log(device.configurations)
                 console.log('connection ok!');
@@ -64,7 +64,7 @@
                     } catch (e) {
                         console.log(e);
                     }
-                    
+
                     throw e;
                 }
             })
