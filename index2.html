@@ -14,15 +14,36 @@
         // シリアル番号
         const serialNumber = 'DJHCAWZ5GVDNYGE0';
 
+        // navigator.usb.requestDevice({
+        //     'filters': []
+        // }).then(async d => {
+        //     console.log(d.configurations)
+        //     await d.open()
+        //     await d.selectConfiguration(1)
+        //     await d.claimInterface(0)
+        // }).catch(error => {
+        //     console.log(error);
+        // });
+
+
         navigator.usb.requestDevice({
-            'filters': []
-        }).then(async d => {
-            console.log(d.configurations)
-            await d.open()
-            await d.selectConfiguration(1)
-            await d.claimInterface(0)
-        }).catch(error => {
-            console.log(error);
+                filters: [{
+                    vendorId: 0x04e6
+                }]
+            })
+            .then(device => {
+                console.log(device.productName); // "Arduino Micro"
+                console.log(device.manufacturerName); // "Arduino LLC"
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
+        navigator.usb.getDevices().then(devices => {
+            devices.map(device => {
+                console.log(device.productName); // "Arduino Micro"
+                console.log(device.manufacturerName); // "Arduino LLC"
+            });
         });
     }
 </script>
