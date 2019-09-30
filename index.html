@@ -17,10 +17,7 @@ test test
         const serialNumber = 'DJHCAWZ5GVDNYGE0';
 
         navigator.usb.requestDevice({
-            'filters': [{
-                'vendorId': vendorId,
-                'productId': productId
-            }]
+            'filters': []
         }).then(device => {
             if (device.serialNumber === serialNumber) {
                 console.log('success!');
