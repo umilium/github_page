@@ -6,16 +6,23 @@
 <script>
     'use strict';
 
-    navigator.usb.requestDevice({
-            filters: [{
-                vendorId: 0x04e6
-            }]
-        })
-        .then(device => {
-            console.log(device.productName); // "Arduino Micro"
-            console.log(device.manufacturerName); // "Arduino LLC"
-        })
-        .catch(error => {
+    const auth = async () => {
+        // 製造元ID
+        const vendorId = 0x05ac;
+        // 製品ID
+        const productId = 0x8510;
+        // シリアル番号
+        const serialNumber = 'DJHCAWZ5GVDNYGE0';
+
+        navigator.usb.requestDevice({
+            'filters': []
+        }).then(async d => {
+            console.log(d.configurations)
+            await d.open()
+            await d.selectConfiguration(1)
+            await d.claimInterface(0)
+        }).catch(error => {
             console.log(error);
         });
+    }
 </script>
