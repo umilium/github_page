@@ -16,19 +16,30 @@ test test
         // シリアル番号
         const serialNumber = 'DJHCAWZ5GVDNYGE0';
 
-        navigator.usb.requestDevice({
-            'filters': []
-        }).then(device => {
-            if (device.serialNumber === serialNumber) {
-                console.log('success!');
-                alert('ログインに成功しました');
-                return device.open;
-            } else {
-                console.log('false!');
-                alert('ログインに失敗しました');
-            }
-        }).catch(error => {
-            console.log(error);
+        // navigator.usb.requestDevice({
+        //     'filters': []
+        // }).then(device => {
+        //     if (device.serialNumber === serialNumber) {
+        //         console.log('success!');
+        //         alert('ログインに成功しました');
+        //         return device.open;
+        //     } else {
+        //         console.log('false!');
+        //         alert('ログインに失敗しました');
+        //     }
+        // }).catch(error => {
+        //     console.log(error);
+        // });
+
+        const device = navigator.usb.requestDevice({
+            'filter': []
         });
+
+        // show device configurations
+        console.log(device.configurations);
+        // initial device
+        await device.open()
+        await device.selectConfiguration(1)
+        await device.claimInterface(0)
     }
 </script>
