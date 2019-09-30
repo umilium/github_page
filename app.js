@@ -154,10 +154,12 @@ var app = new Vue({
     const ports = await serial.getPorts();
     if (ports.length == 0) {
       this.statusText = 'No device found.';
+      console.log('No device found.');
     } else {
       this.statusText = 'Connecting...';
       this.port = ports[0];
       this.connect();
+      console.log('Connecting...');
     }
   }
 });
